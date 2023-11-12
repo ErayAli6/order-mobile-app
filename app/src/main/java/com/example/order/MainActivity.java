@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements Validation {
                                         .client(client)
                                         .build();
                         OrderAPI api = retrofit.create(OrderAPI.class);
-                        @SuppressLint("CutPasteId") Call<OrderAPI.orders> insertedUser =
+                        @SuppressLint("CutPasteId") Call<OrderAPI.orders> insertedOrder =
                                 api.api_add_order(insertedId, new OrderAPI.orders(insertedId,
                                         editFirstName.getText().toString(),
                                         editLastName.getText().toString(),
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements Validation {
                                         editPaymentMethod.getText().toString(),
                                         editDelivered.getText().toString()
                                 ));
-                        Response<OrderAPI.orders> r = insertedUser.execute();
+                        Response<OrderAPI.orders> r = insertedOrder.execute();
                         if (r.isSuccessful()) {
                             OrderAPI.orders resp = r.body();
                             runOnUiThread(() -> {

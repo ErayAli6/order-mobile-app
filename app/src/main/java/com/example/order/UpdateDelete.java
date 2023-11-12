@@ -3,13 +3,12 @@ package com.example.order;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UpdateDelete extends AppCompatActivity {
+public class UpdateDelete extends AppCompatActivity implements OrderServerCommunication {
     protected String ID;
     protected EditText editFirstName, editLastName, editPhone, editEmail, editShippingAddress, editPaymentMethod, editDelivered;
     protected Button btnUpdate, btnDelete;
@@ -84,6 +83,13 @@ public class UpdateDelete extends AppCompatActivity {
                                 editDelivered.getText().toString()
                         )
                 );
+                APICallUpdate(Long.parseLong(ID), editFirstName, editLastName, editPhone, editEmail, editShippingAddress, editPaymentMethod, editDelivered,
+                        message -> runOnUiThread(
+                                () -> Toast.makeText(getApplicationContext(),
+                                        message, Toast.LENGTH_LONG
+                                ).show()
+                        )
+                );
                 Toast.makeText(getApplicationContext(),
                                 "UPDATE OK", Toast.LENGTH_LONG)
                         .show();
@@ -126,6 +132,13 @@ public class UpdateDelete extends AppCompatActivity {
                                 editShippingAddress.getText().toString(),
                                 editPaymentMethod.getText().toString(),
                                 editDelivered.getText().toString()
+                        )
+                );
+                APICallDelete(Long.parseLong(ID),
+                        message -> runOnUiThread(
+                                () -> Toast.makeText(getApplicationContext(),
+                                        message, Toast.LENGTH_LONG
+                                ).show()
                         )
                 );
                 Toast.makeText(getApplicationContext(),

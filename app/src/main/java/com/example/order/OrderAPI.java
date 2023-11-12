@@ -61,7 +61,7 @@ public interface OrderAPI {
     @POST("/api/orders/add/{id}")
     public Call<orders> api_add_order(@Path("id") long id, @Body orders c);
 
-    @PUT("/api/orders/update")
+    @PUT("/api/orders/update/{id}")
     public Call<orders> api_update_order(@Path("id") long id, @Body orders c);
 
     @DELETE("/api/orders/delete/{id}")
