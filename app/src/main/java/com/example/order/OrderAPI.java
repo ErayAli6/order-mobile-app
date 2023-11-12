@@ -20,7 +20,7 @@ public interface OrderAPI {
     }
 
     public class orders {
-        public int ID;
+        public long id;
         public String firstName;
         public String lastName;
         public String phone;
@@ -30,7 +30,7 @@ public interface OrderAPI {
         public String delivered;
 
         public orders(orders copy) {
-            this.ID = copy.ID;
+            this.id = copy.id;
             this.firstName = copy.firstName;
             this.lastName = copy.lastName;
             this.phone = copy.phone;
@@ -40,8 +40,8 @@ public interface OrderAPI {
             this.delivered = copy.delivered;
         }
 
-        public orders(int _ID, String _firstName, String _lastName, String _phone, String _email, String _shippingAddress, String _paymentMethod, String _delivered) {
-            ID = _ID;
+        public orders(long _ID, String _firstName, String _lastName, String _phone, String _email, String _shippingAddress, String _paymentMethod, String _delivered) {
+            id = _ID;
             firstName = _firstName;
             lastName = _lastName;
             phone = _phone;
@@ -56,14 +56,14 @@ public interface OrderAPI {
     public Call<List<orders>> api_users();
 
     @GET("/api/orders/{id}")
-    public Call<orders> api_get_user(@Path("id") int id);
+    public Call<orders> api_get_order(@Path("id") long id);
 
-    @POST("/api/orders/add")
-    public Call<orders> api_add_user(@Body orders c);
+    @POST("/api/orders/add/{id}")
+    public Call<orders> api_add_order(@Path("id") long id, @Body orders c);
 
     @PUT("/api/orders/update")
-    public Call<orders> api_update_user(@Body orders c);
+    public Call<orders> api_update_order(@Path("id") long id, @Body orders c);
 
     @DELETE("/api/orders/delete/{id}")
-    public Call<message> api_delete_user(@Path("id") int id);
+    public Call<message> api_delete_order(@Path("id") long id);
 }

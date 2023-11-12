@@ -1,5 +1,6 @@
 package com.example.order;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements Validation {
 
@@ -152,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements Validation {
                 if (!editDeliveredText.equals("Pending") && !editDeliveredText.equals("In progress") && !editDeliveredText.equals("Delivered")) {
                     throw new Exception("Invalid Status: " + editDeliveredText);
                 }
-                db.insert(editFirstName.getText().toString(),
+                long insertedId = db.insert(editFirstName.getText().toString(),
                         editLastName.getText().toString(),
                         editPhone.getText().toString(),
                         editEmail.getText().toString(),
@@ -160,51 +168,52 @@ public class MainActivity extends AppCompatActivity implements Validation {
                         editPaymentMethod.getText().toString(),
                         editDelivered.getText().toString()
                 );
-//                Thread t = new Thread(() -> {
-//                    try {
-//                        OkHttpClient client = new OkHttpClient.Builder().build();
-//                        Retrofit retrofit =
-//                                new Retrofit.Builder()
-//                                        .baseUrl("http://10.0.0.13:4041")
-//                                        .addConverterFactory(GsonConverterFactory.create())
-//                                        .client(client)
-//                                        .build();
-//                        OrderAPI api = retrofit.create(OrderAPI.class);
-//                        Call<OrderAPI.orders> insertedUser =
-//                                api.api_add_user(new OrderAPI.orders(0,
-//                                        editName.getText().toString(),
-//                                        editAddress.getText().toString(),
-//                                        editPhone.getText().toString(),
-//                                        editEmail.getText().toString()
-//                                ));
-//                        Response<OrderAPI.orders> r = insertedUser.execute();
-//                        if (r.isSuccessful()) {
-//                            OrderAPI.orders resp = r.body();
-//                            runOnUiThread(() -> {
-//                                Toast.makeText(getApplicationContext(),
-//                                                "INSERTED IN SERVER WITH ID = " + resp.ID,
-//                                                Toast.LENGTH_LONG)
-//                                        .show();
-//                            });
-//                        } else {
-//                            throw new RuntimeException("exception in server: "
-//                                    + r.errorBody().string()
-//                            );
-//                        }
-//
-//
-//                    } catch (Exception e) {
-//                        runOnUiThread(() -> {
-//                            Toast.makeText(getApplicationContext(),
-//                                    "Exception: " + e.getLocalizedMessage(),
-//                                    Toast.LENGTH_LONG
-//                            ).show();
-//
-//                        });
-//                    }
-//                });
-//                t.start();
-//
+                Thread t = new Thread(() -> {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().build();
+                        Retrofit retrofit =
+                                new Retrofit.Builder()
+                                        .baseUrl("http://192.168.0.156:8080")
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .client(client)
+                                        .build();
+                        OrderAPI api = retrofit.create(OrderAPI.class);
+                        @SuppressLint("CutPasteId") Call<OrderAPI.orders> insertedUser =
+                                api.api_add_order(insertedId, new OrderAPI.orders(insertedId,
+                                        editFirstName.getText().toString(),
+                                        editLastName.getText().toString(),
+                                        editPhone.getText().toString(),
+                                        editEmail.getText().toString(),
+                                        editShippingAddress.getText().toString(),
+                                        editPaymentMethod.getText().toString(),
+                                        editDelivered.getText().toString()
+                                ));
+                        Response<OrderAPI.orders> r = insertedUser.execute();
+                        if (r.isSuccessful()) {
+                            OrderAPI.orders resp = r.body();
+                            runOnUiThread(() -> {
+                                Toast.makeText(getApplicationContext(),
+                                                "INSERTED IN SERVER WITH ID = " + resp.id,
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                            });
+                        } else {
+                            throw new RuntimeException("exception in server: "
+                                    + r.errorBody().string()
+                            );
+                        }
+                    } catch (IllegalArgumentException | IOException e) {
+                        runOnUiThread(() -> {
+                            Toast.makeText(getApplicationContext(),
+                                    "Exception: " + e.getLocalizedMessage(),
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+                        });
+                    }
+                });
+                t.start();
+
                 Toast.makeText(getApplicationContext(),
                                 "INSERT OK", Toast.LENGTH_LONG)
                         .show();

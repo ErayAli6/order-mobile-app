@@ -1,0 +1,6 @@
+2023-11-12 12:39:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERS" not found (this database is empty); SQL statement:
+select o1_0.id,o1_0.delivered,o1_0.email,o1_0.first_name,o1_0.last_name,o1_0.payment_method,o1_0.phone,o1_0.shipping_address from orders o1_0 [42104-214]
+2023-11-12 12:40:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERS" not found (this database is empty); SQL statement:
+select o1_0.id,o1_0.delivered,o1_0.email,o1_0.first_name,o1_0.last_name,o1_0.payment_method,o1_0.phone,o1_0.shipping_address from orders o1_0 [42104-214]

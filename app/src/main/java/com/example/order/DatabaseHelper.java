@@ -1,6 +1,7 @@
 package com.example.order;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,14 +46,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String FirstName, String LastName, String Phone, String Email,
+    public long insert(String FirstName, String LastName, String Phone, String Email,
                        String ShippingAddress, String PaymentMethod, String Delivered) {
-        String insertQ = "INSERT INTO orders(" +
-                "FirstName, LastName, Phone, Email, ShippingAddress, PaymentMethod, Delivered" +
-                ") VALUES(?, ?, ?, ?, ?, ?, ?)";
-        _myDB.execSQL(insertQ, new Object[]{
-                FirstName, LastName, Phone, Email, ShippingAddress, PaymentMethod, Delivered
-        });
+        ContentValues values = new ContentValues();
+        values.put("FirstName", FirstName);
+        values.put("LastName", LastName);
+        values.put("Phone", Phone);
+        values.put("Email", Email);
+        values.put("ShippingAddress", ShippingAddress);
+        values.put("PaymentMethod", PaymentMethod);
+        values.put("Delivered", Delivered);
+        return _myDB.insert("orders", null, values);
     }
 
     public void update(Orders c) {
