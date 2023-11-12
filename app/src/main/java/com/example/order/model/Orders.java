@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.model;
 
 public class Orders {
     protected String ID, FirstName, LastName, Phone, Email, ShippingAddress, PaymentMethod, Delivered;

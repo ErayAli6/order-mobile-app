@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.order.model.Orders;
 
 import java.util.ArrayList;
 import java.util.List;

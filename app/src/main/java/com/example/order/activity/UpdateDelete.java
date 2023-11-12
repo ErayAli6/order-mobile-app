@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.order.interfaces.OrderServerCommunication;
+import com.example.order.model.Orders;
+import com.example.order.R;
+import com.example.order.interfaces.Validation;
+import com.example.order.db.DatabaseHelper;
 
 public class UpdateDelete extends AppCompatActivity implements OrderServerCommunication {
     protected String ID;

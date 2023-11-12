@@ -1,7 +1,9 @@
-package com.example.order;
+package com.example.order.interfaces;
 
 
 import android.widget.EditText;
+
+import com.example.order.interfaces.OrderAPI;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
