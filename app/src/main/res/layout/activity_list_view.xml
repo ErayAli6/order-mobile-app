@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/listViewFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name" />
+
+    <TextView
+        android:id="@+id/listViewLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name" />
+
+
+    <TextView
+        android:id="@+id/listViewPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone" />
+
+    <TextView
+        android:id="@+id/listViewDelivered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Delivered" />
+
+    <TextView
+        android:id="@+id/listViewID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/listViewShippingAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Shipping Address"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/listViewPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Payment Method"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/listViewEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:visibility="invisible" />
+
+</LinearLayout>
